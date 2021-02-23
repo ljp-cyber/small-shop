@@ -1,0 +1,579 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="head.css" rel="stylesheet" type="text/css">
+<link href="reset.css" rel="stylesheet" type="text/css">
+<link href="main.css" rel="stylesheet" type="text/css">
+<link href="main_bb.css" rel="stylesheet" type="text/css">
+<link href="foot.css" rel="stylesheet" type="text/css">
+<style>
+body {
+	background: url(img/bg.jpg);
+}
+#content {
+	margin: auto auto;
+	width: 1340px;
+}
+#head {
+	width: 950px;
+	margin: 0px auto;
+	background-image: url(img/nav3.jpg);
+	height: 146px;
+	position: relative;
+}
+#zhsh {
+	background: url(img/zs.jpg) no-repeat;
+	height: 600px;
+	width: 1340px;
+	margin: 2px auto;
+}
+#main {
+	margin: 0px auto;
+	width: 950px;
+ //height: 4000px;
+	border: 1px solid green;
+}
+</style>
+<script type="text/javascript">
+ function getCurrentStyle(obj, cssproperty, csspropertyNS){  
+ if(obj.style[cssproperty]){  
+ return obj.style[cssproperty];  
+ }  
+ if (obj.currentStyle) {// IE5+  
+ return obj.currentStyle[cssproperty];  
+ }else if (document.defaultView.getComputedStyle(obj, null)) {// FF/Mozilla  
+ var currentStyle = document.defaultView.getComputedStyle(obj, null);  
+ var value = currentStyle.getPropertyValue(csspropertyNS);  
+ if(!value){//try this method  
+ value = currentStyle[cssproperty];  
+ }  
+ return value;  
+ }else if (window.getComputedStyle) {// NS6+  
+ var currentStyle = window.getComputedStyle(obj, "");  
+ return currentStyle.getPropertyValue(csspropertyNS);  
+ }  
+ }  
+ //alert(getCurrentStyle(mydiv, "backgroundColor", "background-color")); //alerts "yellow"  
+function getMousePos6(event) {
+	var e = event || window.event;
+	var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+	var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+	var x = e.pageX || e.clientX + scrollX;
+	var y = e.pageY || e.clientY + scrollY;
+	//alert('x: ' + x + '\ny: ' + y);
+	return { 'x': x, 'y': y };
+} 
+function jiu(){
+	var jiu=document.getElementsByClassName("main_bb_jiu_img");
+	//alert(jiu.length);
+    for(var i=0;i<jiu.length;i++){
+		var jiu_img=jiu.item(i);
+		jiu_img.onmouseover=jiu_dt;
+		jiu_img.id="main_bb_jiu_img"+i;
+		//jiu_img.onmouseout=jiu_dt_jiesu;
+	}
+}
+var onid=null;
+function jiu_dt(e){
+	//alert("lai");
+	e = e || window.event;
+	var target = e.target || e.srcElement;
+    //alert(target.getAttribute("id"));
+	var dtcd=target.getElementsByClassName("main_bb_jiu_dtcd").item(0);
+	if(typeof dtcd!="undefined"){
+	if(getCurrentStyle(dtcd,"display","dispaly")=="none"){
+		if(onid!=null){
+			var jiu=document.getElementById(onid);
+			var jiu_dt=jiu.getElementsByClassName("main_bb_jiu_dtcd").item(0);
+			jiu_dt.style.display="none";
+		}
+		//alert(target.getAttribute("id"));
+		onid=target.getAttribute("id");
+		dtcd.onmouseout=jiu_dt_jiesu;
+		//alert(getCurrentStyle(dtcd,"display","dispaly"))
+		dtcd.style.display="block";
+		//alert(getCurrentStyle(dtcd,"display","dispaly"))
+		jiu_dt_move();
+	}
+	}
+}
+var x=5;
+var y=5;
+var a=0.75;
+var t;
+function jiu_dt_move(){
+	var jiu=document.getElementById(onid);
+	if(typeof jiu!="undefined"){
+	x++;
+	y++;
+	a-=0.003;
+	var jiu_ul=jiu.getElementsByTagName("ul").item(0);
+	console.log(jiu_ul);
+	jiu_ul.style.left=x+"px";
+	jiu_ul.style.top=y+"px";
+	var jiu_span=jiu.getElementsByTagName("p").item(0);
+	console.log(jiu_span);
+	jiu_span.style.right=x+"px";
+	jiu_span.style.bottom=y+"px";
+	var jiu_dt=jiu.getElementsByClassName("main_bb_jiu_dtcd").item(0);
+	console.log(jiu_dt);
+	console.log(a);
+	jiu_dt.style.background="hsla(0,0%,0%,"+a+")";
+	if(x<115&&y<115){
+		t=setTimeout(function(){jiu_dt_move()},10);
+	}
+	}
+}
+function jiu_dt_jiesu(e){
+	//alert("qu");
+	e = e || window.event;
+	var target = e.target || e.srcElement;
+	var pos=getMousePos6(e);
+    //console.log(pos.x+","+pos.y)
+	var jiu=document.getElementById(onid);
+	//console.log(jiu.offsetLeft+","+jiu.offsetTop);
+	if(target.tagName=="DIV"){
+		if(pos.x-jiu.offsetLeft<5||pos.x-jiu.offsetLeft>295||pos.y-jiu.offsetTop<5||pos.y-jiu.offsetTop>295){
+			target.style.display="none";
+			onid=null;
+			x=5;y=5;a=0.75;
+			clearTimeout(t);
+		}
+	}
+}
+</script>
+</head>
+
+<body onLoad="jiu()">
+<div id="content">
+  <div id="head">
+    <ul id="head_gy">
+      <li><a href="#">我的订单</a></li>
+      <li><a href="#">收藏本店</a></li>
+      <li><a style="border-right:hidden;" href="#">查看购物车</a></li>
+    </ul>
+    <div style="clear:both;"></div>
+    <p id="head_p1">联想笔记本电脑商城</p>
+    <p id="head_p2"> --- 旗舰专营 品质保证 --- </p>
+    <ul id="head_dh">
+      <li><a href="#">宝贝分类<span id="head_dh_tb">&nbsp;&nbsp;</span></a>
+        <ul id="dh_1j">
+          <li><a href="#">所有宝贝</a>
+            <ul id="dh_2j">
+              <li><a href="#">宝贝</a></li>
+              <li><a href="#">宝贝</a></li>
+              <li><a href="#">宝贝</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Lenovo/联想</a></li>
+          <li><a href="#">配件</a></li>
+        </ul>
+      </li>
+      <li><a href="#">主页</a></li>
+    </ul>
+  </div>
+  <div id="zhsh"></div>
+  <div id="main"> <a href="#">
+    <div id="main_lp"></div>
+    </a>
+    <div id="main_kf">
+      <div id="main_kf_kf1">
+        <div class="main_akf_Left">售前客服</div>
+        <div class="main_akf_Right">
+          <ul class="main_akf_Right_ul1">
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+          </ul>
+          <ul class="main_akf_Right_ul2">
+            <li>名字1</li>
+            <li>名字2</li>
+            <li>名字3</li>
+            <li>名字4</li>
+          </ul>
+        </div>
+      </div>
+      <div id="main_kf_kf2">
+        <div class="main_akf_Left">售后客服</div>
+        <div class="main_akf_Right">
+          <ul class="main_akf_Right_ul1">
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+          </ul>
+          <ul class="main_akf_Right_ul2">
+            <li>名字1</li>
+            <li>名字2</li>
+            <li>名字3</li>
+          </ul>
+        </div>
+      </div>
+      <div id="main_kf_kf3">
+        <div class="main_akf_Left">查件客服</div>
+        <div class="main_akf_Right">
+          <ul class="main_akf_Right_ul1">
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+            <li><a href="#"><img src="img/TB2Q.jpg"/></a></li>
+          </ul>
+          <ul class="main_akf_Right_ul2">
+            <li>名字1</li>
+            <li>名字2</li>
+            <li>名字3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div style="background:url(img/tl.png) 0px -275px no-repeat; width:950px; height:94px;"></div>
+    <div id="main_bb1">
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"><span></span></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+    <div style="background:url(img/tl.png) 0px -275px no-repeat; width:950px; height:94px;"></div>
+     <div id="main_bb1">
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div class="main_bb_jiu">
+        <div class="main_bb_jiu_img"><img src="img/bb1.png"/>
+          <div class="main_bb_jiu_dtcd">
+            <ul>
+              <li style="background:white url(img/xtb.gif) -349px -114px no-repeat;"><a href="#"><span></span></a></li>
+              <li style="background:white url(img/xtb.gif) -375px -114px no-repeat;"><a href="#"></a></li>
+              <li style="background:white url(img/xtb.gif) -401px -114px no-repeat;"><a href="#"></a></li>
+            </ul>
+            <p>购买了10件</p>
+          </div>
+        </div>
+        <div class="main_bb_jiu_xx">
+          <p class="main_bb_jiu_xx_jg">2,000.00</p>
+          <p class="main_bb_jiu_xx_lx"><a href="#">Lenovo/联想 拯救者15 -ISK 四核I5 I7 R720-15 游戏本笔记本电脑</a></p>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+    <div id="foot">
+     <div id="foot_dh">
+    <ul>
+      <li><a href="#">首页</a></li>
+      <li><a href="#">听掌柜说</a></li>
+      <li><a href="#">手机店铺</a></li>
+      <li><a href="#">购物车</a></li>
+      <li><a href="#">收藏本店</a></li>
+      <li><a href="#">所有宝贝</a></li>
+      <li><a href="#">热销宝贝</a></li>
+      <li><a href="#">新品上市</a></li>
+    </ul>
+    <a id="foot_tohead" href="#">回到顶部</a> </div>
+  <div id="foot_fw">
+    <ul id="foot_fw_ul1">
+      <li>
+        <p class="foot_fw_ul1_p1">温馨提示</p>
+        <p class="foot_fw_ul1_p2">CONTACT US</p>
+        <p class="foot_fw_ul1_p3">信用卡，花呗付款不参加包邮活动！包邮默认发顺丰陆运和圆通快递，不到的地方</p>
+      </li>
+      <li>
+        <p class="foot_fw_ul1_p1">温馨提示</p>
+        <p class="foot_fw_ul1_p2">CONTACT US</p>
+        <p class="foot_fw_ul1_p3">信用卡，花呗付款不参加包邮活动！包邮默认发顺丰陆运和圆通快递，不到的地方</p>
+      </li>
+      <li>
+        <p class="foot_fw_ul1_p1">温馨提示</p>
+        <p class="foot_fw_ul1_p2">CONTACT US</p>
+        <p class="foot_fw_ul1_p3">信用卡，花呗付款不参加包邮活动！包邮默认发顺丰陆运和圆通快递，不到的地方</p>
+      </li>
+      <li>
+        <p class="foot_fw_ul1_p1">温馨提示</p>
+        <p class="foot_fw_ul1_p2">CONTACT US</p>
+        <p class="foot_fw_ul1_p3">信用卡，花呗付款不参加包邮活动！包邮默认发顺丰陆运和圆通快递，不到的地方</p>
+      </li>
+      <li>
+        <p class="foot_fw_ul1_p1">温馨提示</p>
+        <p class="foot_fw_ul1_p2">CONTACT US</p>
+        <p class="foot_fw_ul1_p3">信用卡，花呗付款不参加包邮活动！包邮默认发顺丰陆运和圆通快递，不到的地方</p>
+      </li>
+    </ul>
+    <ul id="foot_fw_ul2">
+      <li> <span>名字:</span><a href="#"><img src="img/online.aw.gif"/></a> </li>
+      <li> <span>名字:</span><a href="#"><img src="img/online.aw.gif"/></a> </li>
+      <li> <span>名字:</span><a href="#"><img src="img/online.aw.gif"/></a> </li>
+      <li> <span>名字:</span><a href="#"><img src="img/online.aw.gif"/></a> </li>
+      <li> <span>名字:</span><a href="#"><img src="img/online.aw.gif"/></a> </li>
+    </ul>
+  </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

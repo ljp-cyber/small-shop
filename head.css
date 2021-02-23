@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#head #head_gy {
+	margin-top: 5px;
+	float: right;
+}
+#head #head_gy li {
+	min-width: 50px;
+	min-height: 15px;
+	float: left;
+}
+#head #head_gy li a {
+	border-right: 1px solid white;
+	padding: 0 5px;
+	color: white;
+	line-height: 15px;
+ //text-align:center;
+	font-size: 12px;
+	overflow: hidden;
+}
+#head #head_gy li a:hover{
+	color:#7f5826;
+	text-decoration:none;
+	}
+#head #head_p1 {
+	font: normal bold 36px/50px "微软雅黑";
+	color: white;
+	text-align: center;
+}
+#head #head_p2 {
+	font: normal bold 20px/24px "微软雅黑";
+	color: white;
+	text-align: center;
+}
+#head #head_dh {
+	height: 37px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+#head #head_dh li {
+	float: left;
+	width: 200px;
+	height: 37px;
+}
+#head #head_dh li a {
+	text-decoration:none;
+	color:white;
+	font-size: 16px;
+	line-height: 37px;
+	display: block;
+ //border:1px solid green;
+	height: 37px;
+	text-align: center;
+}
+#head #head_dh li a:hover{
+	background:#634119;
+	}
+#head #head_dh li #dh_1j{
+	display:none;}	
+#head #head_dh li:hover #dh_1j{
+	display:list-item;}	
+#head #head_dh li ul li {
+	background:#AD8144;
+	position:relative;
+	}
+#head #head_dh li ul li a:hover{
+	background:#634119;
+	}	
+#head #head_dh li ul li #dh_2j{
+	display:none;
+	position:absolute;
+	top:0px;
+	left:200px;
+	float:left;
+	}	
+#head #head_dh li ul li:hover #dh_2j{
+	display:block;
+	}
+#head #head_dh li ul li ul li{
+	width:200px;
+	height:37px;
+	}	
+#head #head_dh #head_dh_tb {
+	margin-left:10px;
+	font-size: 16px;
+	background: url(img/xtb.gif) -712px -10px no-repeat;
+}

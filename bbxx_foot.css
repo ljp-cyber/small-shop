@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+#foot{
+	margin:10px auto;
+	width:1140px;
+	}
+#foot_dh{
+	width:950px;
+	height:93px;
+	background: url(img/tl.png) 0 -908px no-repeat;
+	}
+#foot_dh ul{
+	padding:0px 20px;
+	width:750px;
+	height:30px;
+	background:#644119;
+	float:left;
+	margin-left:30px;
+	margin-top:55px;
+	}
+#foot_dh li{
+	//border:1px solid black;
+	width:90px;
+	height:30px;
+	float:left;
+	font:normal normal 12px/30px "微软雅黑";
+	text-align:center;
+	}
+#foot_dh ul li a{
+	color:white;
+	}	
+#foot_dh #foot_tohead{
+	float:left;
+	margin-top:55px;
+	display:block;
+	width:60px;
+	height:30px;
+	margin-left:30px;
+	font:normal normal 14px/30px "微软雅黑";
+	text-align:center;
+	color:white;
+	}	
+#foot_fw{
+	width:950px;
+	height:250px;
+	background:url(img/gold.jpg);
+	}
+#foot_fw #foot_fw_ul1{
+	margin:25px 30px 10px 30px;
+	padding:0px 30px 0px 30px;
+	float:left;
+	width:820px;
+	height:140px;
+	background:#644119;
+	}
+#foot_fw #foot_fw_ul1 li{
+	margin:15px 24px;
+	float:left;
+	width:115px;
+	height:125px;
+	color:white;
+	}	
+#foot_fw #foot_fw_ul1 li .foot_fw_ul1_p1{
+	font:normal bold 14px/18px "微软雅黑";
+	}
+#foot_fw #foot_fw_ul1 li .foot_fw_ul1_p2{
+	font:normal bold 14px/18px "微软雅黑";
+	}
+#foot_fw #foot_fw_ul1 li .foot_fw_ul1_p3{
+	margin-top:10px;
+	font:normal normal 12px/18px "微软雅黑";
+	}		
+#foot_fw #foot_fw_ul2{
+	margin:10px 280px;
+	float:left;
+	width:400px;
+	height:40px;
+	background:#644119;
+	}
+#foot_fw #foot_fw_ul2 li{
+	//border:1px solid white;
+	margin:8px 10px;
+	float:left;
+	width:58px;
+	height:20px;
+	font: normal normal 12px/12px "宋体";
+	position:relative;
+	}	
+#foot_fw #foot_fw_ul2 li span{
+	position:absolute;
+	top:5px;
+	left:5px;
+	}	
+#foot_fw #foot_fw_ul2 li a{
+	position:absolute;
+	top:2px;
+	left:35px;
+	}	
+
+		
